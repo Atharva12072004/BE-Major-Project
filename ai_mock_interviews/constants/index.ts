@@ -97,10 +97,11 @@ export const mappings = {
   "aws amplify": "amplify",
 };
 
-export const interviewer: CreateAssistantDTO = {
-  name: "Interviewer",
+// Interviewer 1 - Male Voice 1
+export const interviewer1: CreateAssistantDTO = {
+  name: "Interviewer 1",
   firstMessage:
-    "Hello! Thank you for taking the time to speak with me today. I'm excited to learn more about you and your experience.",
+    "Hello! Thank you for taking the time to speak with us today. I'm the first interviewer, and I'm excited to learn more about you and your experience.",
   transcriber: {
     provider: "deepgram",
     model: "nova-2",
@@ -108,7 +109,7 @@ export const interviewer: CreateAssistantDTO = {
   },
   voice: {
     provider: "11labs",
-    voiceId: "sarah",
+    voiceId: "adam", // Male voice
     stability: 0.4,
     similarityBoost: 0.8,
     speed: 0.9,
@@ -121,39 +122,116 @@ export const interviewer: CreateAssistantDTO = {
     messages: [
       {
         role: "system",
-        content: `You are a professional job interviewer conducting a real-time voice interview with a candidate. Your goal is to assess their qualifications, motivation, and fit for the role.
+        content: `You are the first interviewer in a panel of 3 interviewers (2 male, 1 female). You will ask questions one by one with the other interviewers.
+
+You are Interviewer 1 (Male Voice 1). After you ask your question, wait for the candidate's response, then the next interviewer will ask their question.
 
 Interview Guidelines:
-Follow the structured question flow:
+Follow the structured question flow. You will ask questions from this list one by one:
 {{questions}}
 
-Engage naturally & react appropriately:
-Listen actively to responses and acknowledge them before moving forward.
-Ask brief follow-up questions if a response is vague or requires more detail.
-Keep the conversation flowing smoothly while maintaining control.
-Be professional, yet warm and welcoming:
-
-Use official yet friendly language.
-Keep responses concise and to the point (like in a real voice interview).
-Avoid robotic phrasing—sound natural and conversational.
-Answer the candidate’s questions professionally:
-
-If asked about the role, company, or expectations, provide a clear and relevant answer.
-If unsure, redirect the candidate to HR for more details.
-
-Conclude the interview properly:
-Thank the candidate for their time.
-Inform them that the company will reach out soon with feedback.
-End the conversation on a polite and positive note.
-
-
-- Be sure to be professional and polite.
-- Keep all your responses short and simple. Use official language, but be kind and welcoming.
-- This is a voice conversation, so keep your responses short, like in a real conversation. Don't ramble for too long.`,
+IMPORTANT: 
+- You are part of a panel interview with 3 interviewers
+- Ask ONE question from the list, then let the candidate respond
+- After the candidate responds, acknowledge briefly and indicate the next interviewer will continue
+- Keep your responses very short - just ask your question and brief acknowledgment
+- Be professional, yet warm and welcoming
+- This is a voice conversation, so keep responses concise`,
       },
     ],
   },
 };
+
+// Interviewer 2 - Male Voice 2
+export const interviewer2: CreateAssistantDTO = {
+  name: "Interviewer 2",
+  firstMessage: "",
+  transcriber: {
+    provider: "deepgram",
+    model: "nova-2",
+    language: "en",
+  },
+  voice: {
+    provider: "11labs",
+    voiceId: "josh", // Male voice 2
+    stability: 0.4,
+    similarityBoost: 0.8,
+    speed: 0.9,
+    style: 0.5,
+    useSpeakerBoost: true,
+  },
+  model: {
+    provider: "openai",
+    model: "gpt-4",
+    messages: [
+      {
+        role: "system",
+        content: `You are the second interviewer in a panel of 3 interviewers (2 male, 1 female). You will ask questions one by one with the other interviewers.
+
+You are Interviewer 2 (Male Voice 2). After you ask your question, wait for the candidate's response, then the next interviewer will ask their question.
+
+Interview Guidelines:
+Follow the structured question flow. You will ask questions from this list one by one:
+{{questions}}
+
+IMPORTANT: 
+- You are part of a panel interview with 3 interviewers
+- Ask ONE question from the list, then let the candidate respond
+- After the candidate responds, acknowledge briefly and indicate the next interviewer will continue
+- Keep your responses very short - just ask your question and brief acknowledgment
+- Be professional, yet warm and welcoming
+- This is a voice conversation, so keep responses concise`,
+      },
+    ],
+  },
+};
+
+// Interviewer 3 - Female Voice
+export const interviewer3: CreateAssistantDTO = {
+  name: "Interviewer 3",
+  firstMessage: "",
+  transcriber: {
+    provider: "deepgram",
+    model: "nova-2",
+    language: "en",
+  },
+  voice: {
+    provider: "11labs",
+    voiceId: "sarah", // Female voice
+    stability: 0.4,
+    similarityBoost: 0.8,
+    speed: 0.9,
+    style: 0.5,
+    useSpeakerBoost: true,
+  },
+  model: {
+    provider: "openai",
+    model: "gpt-4",
+    messages: [
+      {
+        role: "system",
+        content: `You are the third interviewer in a panel of 3 interviewers (2 male, 1 female). You will ask questions one by one with the other interviewers.
+
+You are Interviewer 3 (Female Voice). After you ask your question, wait for the candidate's response, then the next interviewer will ask their question.
+
+Interview Guidelines:
+Follow the structured question flow. You will ask questions from this list one by one:
+{{questions}}
+
+IMPORTANT: 
+- You are part of a panel interview with 3 interviewers
+- Ask ONE question from the list, then let the candidate respond
+- After the candidate responds, acknowledge briefly and indicate the next interviewer will continue
+- Keep your responses very short - just ask your question and brief acknowledgment
+- Be professional, yet warm and welcoming
+- This is a voice conversation, so keep responses concise`,
+      },
+    ],
+  },
+};
+
+// Legacy interviewer for backward compatibility
+export const interviewer: CreateAssistantDTO = interviewer1;
 
 export const feedbackSchema = z.object({
   totalScore: z.number(),

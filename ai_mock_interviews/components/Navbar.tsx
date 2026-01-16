@@ -55,6 +55,12 @@ const Navbar = ({ user }: NavbarProps) => {
           >
             Generate Interview
           </Link>
+          <Link
+            href="#"
+            className="text-light-100 hover:text-primary-100 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+          >
+            Smart Coding
+          </Link>
           <a
             href="https://resume-five-psi-95.vercel.app/"
             target="_blank"
@@ -210,6 +216,13 @@ const Navbar = ({ user }: NavbarProps) => {
                 className="text-light-100 hover:text-primary-100 block px-3 py-3 rounded-md text-base font-medium hover:bg-dark-200 transition-colors"
               >
                 Generate Interview
+              </Link>
+              <Link
+                href="#"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-light-100 hover:text-primary-100 block px-3 py-3 rounded-md text-base font-medium hover:bg-dark-200 transition-colors"
+              >
+                Smart Coding
               </Link>
               <a
                 href="https://resume-five-psi-95.vercel.app/"
